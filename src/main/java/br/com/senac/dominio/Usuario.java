@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CollectionTable;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,8 +14,7 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity
-public class Aluno implements Serializable {
+public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -27,25 +24,18 @@ public class Aluno implements Serializable {
 
 	private String nome;
 
+	private String sobreNome;
+
 	private String email;
 
 	@JsonIgnore
 	private String senha;
 
-	@OneToMany(mappedBy = "aluno")
+	@OneToMany(mappedBy = "Usuario")
 	private List<Endereco> enderecos = new ArrayList<>();
 
-	@ElementCollection
 	@CollectionTable(name = "TELEFONE")
 	private Set<String> telefone = new HashSet();
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
 
 	public List<Endereco> getEnderecos() {
 		return enderecos;
@@ -79,12 +69,28 @@ public class Aluno implements Serializable {
 		this.nome = nome;
 	}
 
+	public String getSobreNome() {
+		return sobreNome;
+	}
+
+	public void setSobreNome(String sobreNome) {
+		this.sobreNome = sobreNome;
+	}
+
 	public String getEmail() {
 		return email;
 	}
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	public static long getSerialversionuid() {
